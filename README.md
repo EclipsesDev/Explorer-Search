@@ -1,6 +1,6 @@
 # Explorer Search
 
-A simple fast indexed database Windows file search app built with:
+A simple fast indexed database Windows 11 file search app built with:
 - `C#`, `.NET 8`, `WinUI 3`
 
 ## Requirements
