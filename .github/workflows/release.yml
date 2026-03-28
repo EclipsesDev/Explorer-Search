@@ -1,0 +1,43 @@
+name: Create New Releases
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    env:
+      PROJECT_PATH: src/main/ExplorerSearch.App/ExplorerSearch.App.csproj
+      PUBLISH_DIR: publish/win-x64
+      ZIP_NAME: ExplorerSearch-${{ github.ref_name }}-win-x64.zip
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Restore
+        run: dotnet restore "${{ env.PROJECT_PATH }}"
+
+      - name: Publish WinUI app
+        run: dotnet publish "${{ env.PROJECT_PATH }}" -c Release -r win-x64 --self-contained true -p:WindowsPackageType=None -o "${{ env.PUBLISH_DIR }}"
+
+      - name: Package release zip
+        shell: pwsh
+        run: Compress-Archive -Path "${{ env.PUBLISH_DIR }}\*" -DestinationPath "${{ env.ZIP_NAME }}" -Force
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ github.ref_name }}
+          generate_release_notes: true
+          files: |
+            ${{ env.ZIP_NAME }}
+            ${{ env.PUBLISH_DIR }}/*.exe
