@@ -13,8 +13,8 @@ jobs:
     runs-on: windows-latest
     env:
       PROJECT_PATH: src/main/ExplorerSearch.App/ExplorerSearch.App.csproj
-      PUBLISH_DIR: publish/win-x64
-      ZIP_NAME: ExplorerSearch-${{ github.ref_name }}-win-x64.zip
+      PUBLISH_DIR: publish-single/win-x64
+      ZIP_NAME: ExplorerSearch-${{ github.ref_name }}-win-x64-single.zip
     steps:
       - uses: actions/checkout@v4
 
@@ -27,7 +27,7 @@ jobs:
         run: dotnet restore "${{ env.PROJECT_PATH }}"
 
       - name: Publish WinUI app
-        run: dotnet publish "${{ env.PROJECT_PATH }}" -c Release -r win-x64 --self-contained true -p:WindowsPackageType=None -o "${{ env.PUBLISH_DIR }}"
+        run: dotnet publish "${{ env.PROJECT_PATH }}" -c Release -r win-x64 --self-contained true -p:WindowsPackageType=None -p:WindowsAppSDKSelfContained=true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:EnableCompressionInSingleFile=true -p:PublishTrimmed=false -p:DebugType=None -p:DebugSymbols=false -o "${{ env.PUBLISH_DIR }}"
 
       - name: Package release zip
         shell: pwsh
