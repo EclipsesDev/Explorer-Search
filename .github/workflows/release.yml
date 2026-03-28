@@ -14,9 +14,6 @@ jobs:
     env:
       PROJECT_PATH: src/main/ExplorerSearch.App/ExplorerSearch.App.csproj
       PUBLISH_DIR: publish/win-x64
-      SINGLE_FILE_PUBLISH_DIR: publish-single/win-x64
-      RELEASE_ASSETS_DIR: release-assets
-      EXE_ASSET_NAME: ExplorerSearch.exe
       ZIP_NAME: ExplorerSearch-${{ github.ref_name }}-win-x64.zip
     steps:
       - uses: actions/checkout@v4
@@ -36,13 +33,6 @@ jobs:
         shell: pwsh
         run: Compress-Archive -Path "${{ env.PUBLISH_DIR }}\*" -DestinationPath "${{ env.ZIP_NAME }}" -Force
 
-      - name: Publish single-file exe
-        run: dotnet publish "${{ env.PROJECT_PATH }}" -c Release -r win-x64 --self-contained true -p:WindowsPackageType=None -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:EnableCompressionInSingleFile=true -p:DebugType=None -p:DebugSymbols=false -o "${{ env.SINGLE_FILE_PUBLISH_DIR }}"
-
-      - name: Prepare exe asset name
-        shell: pwsh
-        run: New-Item -ItemType Directory -Path "${{ env.RELEASE_ASSETS_DIR }}" -Force | Out-Null; Copy-Item -Path "${{ env.SINGLE_FILE_PUBLISH_DIR }}\*.exe" -Destination "${{ env.RELEASE_ASSETS_DIR }}\${{ env.EXE_ASSET_NAME }}" -Force
-
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
@@ -50,4 +40,4 @@ jobs:
           generate_release_notes: true
           files: |
             ${{ env.ZIP_NAME }}
-            ${{ env.RELEASE_ASSETS_DIR }}/${{ env.EXE_ASSET_NAME }}
+            ${{ env.PUBLISH_DIR }}/Explorer Search.exe
