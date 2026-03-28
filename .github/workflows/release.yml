@@ -15,6 +15,7 @@ jobs:
       PROJECT_PATH: src/main/ExplorerSearch.App/ExplorerSearch.App.csproj
       PUBLISH_DIR: publish-single/win-x64
       ZIP_NAME: ExplorerSearch-${{ github.ref_name }}-win-x64-single.zip
+      EXE_NAME: ExplorerSearch.exe
     steps:
       - uses: actions/checkout@v4
 
