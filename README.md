@@ -2,7 +2,7 @@
 
 `Explorer Search` is a lightweight Windows file search app built with `C#`, `.NET 8`, and `WinUI 3`.
 
-It is designed for fast filename lookup by using a local database index, so repeated searches are much quicker than scanning folders every time.
+It is designed for fast file name lookup using a local database index, so repeated searches are quicker than Windows 11 File Explorer search on large directories.
 
 ## What it does
 
