@@ -1,4 +1,19 @@
-# Explorer Search
+<h1 align="center"> Explorer Search </h1>
+
+<p align="center">
+  <img src="https://img.shields.io/github/stars/EclipsesDev/Explorer-Search?style=for-the-badge&color=yellow" />
+  <img src="https://img.shields.io/github/forks/EclipsesDev/Explorer-Search?style=for-the-badge&color=blue" />
+  <img src="https://img.shields.io/github/watchers/EclipsesDev/Explorer-Search?style=for-the-badge&color=green" />
+  <img src="https://img.shields.io/github/issues/EclipsesDev/Explorer-Search?style=for-the-badge&color=red" />
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/github/last-commit/EclipsesDev/Explorer-Search?style=for-the-badge&color=purple" />
+  <img src="https://img.shields.io/github/license/EclipsesDev/Explorer-Search?style=for-the-badge&color=orange" />
+  <img src="https://img.shields.io/github/repo-size/EclipsesDev/Explorer-Search?style=for-the-badge&color=lightgrey" />
+</p>
+
+---
 
 `Explorer Search` is a lightweight Windows file search app built with `C#`, `.NET 8`, and `WinUI 3`.
 
